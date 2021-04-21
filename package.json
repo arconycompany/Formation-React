@@ -1,0 +1,28 @@
+{
+  "name": "formation-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d build",
+    "server": "webpack serve",
+    "webpack": "webpack ./src/index.js --mode development",
+    "start": "concurrently \"npm run server\" \"npm run webpack\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.13.15",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.35.0",
+    "webpack-bundle-analyzer": "^4.4.1",
+    "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "babel-loader": "^8.2.2",
+    "react": "^17.0.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
