@@ -1,7 +1,7 @@
 const initialAppState = {
+  locale: 'fr',
   productsCount: 0,
   productsIds: [],
-  locale: "FR"
 };
 
 export const appReducer = (state = initialAppState, action) => {
@@ -11,6 +11,11 @@ export const appReducer = (state = initialAppState, action) => {
         ...state,
         productsCount: state.productsCount + 1,
         productsIds: [...state.productsIds, action.productId],
+      };
+    case 'SWITCH_LANG':
+      return {
+        ...state,
+        locale: action.locale,
       };
     default:
       return state;

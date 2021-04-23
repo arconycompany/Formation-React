@@ -5,7 +5,7 @@ export const addToCart = (productId) => ({
   productId,
 });
 
-export const switchLange = () => (dispatch) => {
-  locale: dispatch
+export const switchLang = (locale) => ({
+  type: 'SWITCH_LANG',
+  locale,
 });
-

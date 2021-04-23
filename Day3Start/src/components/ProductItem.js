@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { addToCart } from '../store/actions/app';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { useIntl } from 'react-intl';
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, productsIds, onAddProduct }) => {
   const [quantity, setQuantity] = useState(1);
-  const productsIds = useSelector((store) => store.app.productsIds);
-  const dispatch = useDispatch();
-  const onAddProduct = () => dispatch(addToCart());
+  const { formatMessage } = useIntl();
 
   const handleQuantity = (selectedQuantity) => {
     setQuantity(selectedQuantity);
@@ -33,7 +32,7 @@ const ProductItem = ({ product }) => {
             <option value="3">3</option>
           </select>
           <button type="button" onClick={() => onAddProduct(product.id)}>
-            Ajouter au panier
+            {formatMessage({ id: 'buttonAddToCart' })}
           </button>
         </figcaption>
       </figure>
@@ -41,4 +40,12 @@ const ProductItem = ({ product }) => {
   );
 };
 
-export default ProductItem;
+const mapStateToProps = (state) => ({
+  productsIds: state.app.productsIds,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddProduct: (productId) => dispatch(addToCart(productId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem);

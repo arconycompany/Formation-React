@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Provider as ReduxProvider, useSelector } from 'react-redux';
-import { IntlProvider  } from 'react-intl';
+import React from 'react';
+import { IntlProvider } from 'react-intl';
 import CartCount from 'components/CartCount';
-import SwitchLang from 'components/SwitchLang';
 import ProductList from 'components/ProductList';
-import { store } from '../store';
-import fr from '../translation/fr.json';
-import en from '../translation/en.json';
-
-
+import fr from '../translations/fr.json';
+import en from '../translations/en.json';
+import { SwitchLang } from './SwitchLang';
+import { useSelector } from 'react-redux';
 
 const messages = {
   fr,
-  en
+  en,
 };
 
-const locale = 'en';
+export const App = () => {
+  const locale = useSelector((store) => store.app.locale);
 
-export const App = () => {  
-const myLocale= useSelector(store => store.app.myLocale)
-return (
-  
-      <IntlProvider locale="fr" messages={messages['fr']}>
-        <SwitchLang />
-        <CartCount />
-        <ProductList />
-      </IntlProvider>
-
-)};
+  return (
+    <IntlProvider locale={locale} messages={messages[locale]}>
+      <SwitchLang />
+      <CartCount />
+      <Router>
+      <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </IntlProvider>
+  );
+};

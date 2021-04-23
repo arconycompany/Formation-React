@@ -1,11 +1,12 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import CartCount from 'components/CartCount';
-import ProductList from 'components/ProductList';
 import fr from '../translations/fr.json';
 import en from '../translations/en.json';
 import { SwitchLang } from './SwitchLang';
 import { useSelector } from 'react-redux';
+import { HomeScreen } from '../pages/Home';
 
 const messages = {
   fr,
@@ -19,7 +20,13 @@ export const App = () => {
     <IntlProvider locale={locale} messages={messages[locale]}>
       <SwitchLang />
       <CartCount />
-      <ProductList />
+      <Router>
+        <Switch>
+          <Route path="/">
+            <HomeScreen />
+          </Route>
+        </Switch>
+      </Router>
     </IntlProvider>
   );
 };

@@ -1,15 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { switchLang } from '../store/actions/app';
 
-const SwitchLang = ({ locale }) => <select onChange={(event) => handleLangage(event.target.value)}><option value="FR">FR</option><option value="EN">EN</option></select>;
+export const SwitchLang = () => {
+  const dispatch = useDispatch();
+  const onChange = (locale) => dispatch(switchLang(locale));
 
-
-const handleLangage= (langageSelected) => {
-  dispatch(setLangage(langageSelected));
+  return (
+    <select onChange={(event) => onChange(event.target.value)}>
+      <option value="fr">fr</option>
+      <option value="en">en</option>
+    </select>
+  );
 };
-
-const mapDispatchToProps = (dispatch) => ({
-  handleLanguage: () => dispatch(getProductsFromApi()),
-});
-
-export default connect(null, mapDispatchToProps)(SwitchLang);
