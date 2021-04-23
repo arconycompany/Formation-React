@@ -2,6 +2,7 @@ const initialState = {
   products: [],
   isLoading: true,
   error: null,
+  product: null,
 };
 
 export const dataReducer = (state = initialState, action) => {
@@ -23,6 +24,16 @@ export const dataReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.error,
       };
+      case 'RECEIVE_PRODUCT':
+        return {
+          ...state,
+          product: action.product
+        };
+        case 'CLEAR_PRODUCT':
+          return {
+            ...state,
+            product: initialState.product
+          };
     default:
       return state;
   }
