@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { addToCart } from '../store/actions/app';
 import { connect } from 'react-redux';
 import { useIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 const ProductItem = ({ product, productsIds, onAddProduct }) => {
   const [quantity, setQuantity] = useState(1);
@@ -34,6 +35,7 @@ const ProductItem = ({ product, productsIds, onAddProduct }) => {
           <button type="button" onClick={() => onAddProduct(product.id)}>
             {formatMessage({ id: 'buttonAddToCart' })}
           </button>
+          <Link to={`/product/${product.id}`}>Voir le produit</Link>
         </figcaption>
       </figure>
     </li>

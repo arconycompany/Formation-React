@@ -7,6 +7,7 @@ import en from '../translations/en.json';
 import { SwitchLang } from './SwitchLang';
 import { useSelector } from 'react-redux';
 import { HomeScreen } from '../pages/Home';
+import { ProductScreen } from '../pages/Product';
 
 const messages = {
   fr,
@@ -22,6 +23,9 @@ export const App = () => {
       <CartCount />
       <Router>
         <Switch>
+          <Route path="/product/:id">
+            <ProductScreen />
+          </Route>
           <Route path="/">
             <HomeScreen />
           </Route>
